@@ -25,7 +25,7 @@ jobs:
       - name: execute py script # run main.py
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+          GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
         run: python tallydatafromgmail.py
 
       - name: commit files
