@@ -386,8 +386,13 @@ logger.addHandler(logger_stream_handler)
 
 
 # retrieve environment variables
-username = "saabtyresdata@gmail.com"
-password = "zzkihamazfujqvke"
+try:
+    username = os.environ["GMAIL_USER"]
+    password = os.environ["GMAIL_PASS"]
+
+except KeyError:
+    print("SECRETS NOT FOUND!")
+
 
 # test program
 # IMPORTANT: NOT ALL USE CASES ARE TESTED. ONLY THE SIMPLEST USE CASE IS TESTED HERE.
