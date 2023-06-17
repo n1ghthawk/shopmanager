@@ -388,7 +388,7 @@ logger.addHandler(logger_stream_handler)
 # retrieve environment variables
 try:
     username = os.environ["GMAIL_USER"]
-    password = os.environ["GMAIL_PASS"]
+    password = os.environ["GMAIL_PASSWORD"]
 
 except KeyError:
     print("SECRETS NOT FOUND!")
