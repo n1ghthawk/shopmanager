@@ -2,8 +2,7 @@ name: run tallydatafromgmail.py
 
 on:
   schedule:
-    - cron: '*/15 8-23 * * *' # At 00:00 on Monday
-    - cron: '*/5 0-3 * * *' # At 00:00 on Monday
+    - cron: '*/15 3-22 * * *' # At 00:00 on Monday
 
 jobs:
   build:
