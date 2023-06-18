@@ -12,6 +12,8 @@ jobs:
 
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: setup python
         uses: actions/setup-python@v4
