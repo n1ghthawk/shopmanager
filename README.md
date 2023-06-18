@@ -1,2 +1,2 @@
 # shopmanager
-Manages Shop.
+Manages Shop
