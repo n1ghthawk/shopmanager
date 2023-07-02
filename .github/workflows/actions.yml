@@ -29,7 +29,7 @@ jobs:
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
-        run: python tallydatafromgmail.py
+        run: python ./code/tallydatafromgmail.py
 
       - name: commit files
         run: |
