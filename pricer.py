@@ -5,10 +5,10 @@ processed_stock = "./storage/Processed Stock Summary.csv"
 final_price_list = "./storage/final_price_list.csv"
 mask_list = "./storage/Mask Data.csv"
 
-processed_stock_json = "./public_Processed Stock Summary.json"
-final_price_list_json = "./public_final_price_list.json"
-stock_with_price_list_json = "./public_stock_with_price_list.json"
-mask_json = "./public_mask.json"
+processed_stock_json = "./public/Processed Stock Summary.json"
+final_price_list_json = "./public/final_price_list.json"
+stock_with_price_list_json = "./public/stock_with_price_list.json"
+mask_json = "./public/mask.json"
 
 def csv2df(loc, headers=None):
     # Read in the file
