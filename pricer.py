@@ -3,10 +3,12 @@ import numpy as np
 
 processed_stock = "./storage/Processed Stock Summary.csv"
 final_price_list = "./storage/final_price_list.csv"
+mask_list = "./storage/Mask Data.csv"
 
 processed_stock_json = "./public_Processed Stock Summary.json"
 final_price_list_json = "./public_final_price_list.json"
 stock_with_price_list_json = "./public_stock_with_price_list.json"
+mask_json = "./public_mask.json"
 
 def csv2df(loc, headers=None):
     # Read in the file
@@ -43,17 +45,24 @@ def get_processed_df():
     clean_df(processed_stock_df, 'items')
     return processed_stock_df
 
-
 def get_final_price_list_df():
     final_price_list_df = csv2df(final_price_list)
     final_price_list_df.drop(columns=['under'], inplace=True)
     clean_df(final_price_list_df, 'items')
     return final_price_list_df
 
+def get_mask_df():
+    mask_df = csv2df(mask_list,["code", "items", "under", "quantity"])
+    mask_df.drop(columns=['under'], inplace=True)
+    mask_df = mask_df[mask_df.quantity != 0]
+    return mask_df
+
 def get_stock_with_price_list_df(final_price_list_df, processed_stock_df):
     merged = pd.merge(final_price_list_df, processed_stock_df, on='items', how='right',suffixes=('_pricelist', ''))
     merged.drop(columns=['code_pricelist'], inplace=True)
     return merged
+
+
 
 
 
@@ -65,8 +74,10 @@ def saveAsJSON(df, loc):
 processed_stock_df = get_processed_df()
 final_price_list_df = get_final_price_list_df()
 stock_with_price_df = get_stock_with_price_list_df(final_price_list_df, processed_stock_df)
+mask_df = get_mask_df()
 # generating JSON for stock with price list
 
 saveAsJSON(processed_stock_df, processed_stock_json)
 saveAsJSON(final_price_list_df, final_price_list_json)
 saveAsJSON(stock_with_price_df, stock_with_price_list_json)
+saveAsJSON(mask_df, mask_json)
