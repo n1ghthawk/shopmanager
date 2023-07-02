@@ -414,6 +414,17 @@ with GmailConnection(username, password) as gmail:
     fp = open("./storage/Processed Stock Summary.csv", 'wb')
     fp.write(email_object.attachment_data)
     fp.close()
+    
+    email_object_mask = GmailEmail.from_search_result(
+        gmail_connection=connection,
+        subject="Mask Data",
+        From="saabtyresdata@gmail.com",
+        unseen=None,
+    )
+    fp = open("./storage/Mask Data.csv", 'wb')
+    fp.write(email_object_mask.attachment_data)
+    fp.close()
+
     fp = open("status.csv", 'w')
     fp.write(dateLastUpdate + "\n")
     fp.write(datePublish)
