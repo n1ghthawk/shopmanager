@@ -411,7 +411,7 @@ with GmailConnection(username, password) as gmail:
     subject = email_object.info['Subject'].split(" ")
     dateLastUpdate = subject[3] + " " +subject[4]
     datePublish = datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime('%d-%b-%Y %H:%M')
-    fp = open("../storage/tally_processed.csv", 'wb')
+    fp = open("./storage/tally_processed.csv", 'wb')
     fp.write(email_object.attachment_data)
     fp.close()
     fp = open("status.csv", 'w')
