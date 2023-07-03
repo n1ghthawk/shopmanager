@@ -18,7 +18,7 @@ def csv2df(loc, headers=None):
     filedata = filedata.replace('\00', '')
     filedata = filedata.replace(",\n", '')
     # Write the file out again
-    with open(loc, 'w', encoding='utf-8') as file:
+    with open(loc, 'w') as file:
         file.write(filedata)
     if headers:
         return pd.read_csv(loc, names=headers)
