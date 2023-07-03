@@ -52,7 +52,7 @@ def get_final_price_list_df():
     return final_price_list_df
 
 def get_mask_df():
-    mask_df = csv2df(final_price_listmask_list, names=["code", "items", "under", "quantity"])
+    mask_df = csv2df(mask_list, names=["code", "items", "under", "quantity"])
     mask_df.drop(columns=['under'], inplace=True)
     mask_df = mask_df[mask_df.quantity != 0]
     return mask_df
