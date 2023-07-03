@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 
-processed_stock = "./storage/Processed Stock Summary.csv"
-final_price_list = "./storage/final_price_list.csv"
-mask_list = "./storage/Mask Data.csv"
+processed_stock = "storage_processed_stock_summary.csv"
+final_price_list = "storage_final_price_list.csv"
+mask_list = "storage_mask_data.csv"
 
 processed_stock_json = "./public/Processed Stock Summary.json"
 final_price_list_json = "./public/final_price_list.json"
