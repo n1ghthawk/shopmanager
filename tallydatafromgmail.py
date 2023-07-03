@@ -421,6 +421,7 @@ with GmailConnection(username, password) as gmail:
         From="saabtyresdata@gmail.com",
         unseen=None,
     )
+    print(email_object_mask)
     fp = open("storage_mask_data.csv", 'wb')
     fp.write(email_object_mask.attachment_data)
     fp.close()
