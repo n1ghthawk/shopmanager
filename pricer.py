@@ -74,10 +74,10 @@ def saveAsJSON(df, loc):
 processed_stock_df = get_processed_df()
 final_price_list_df = get_final_price_list_df()
 stock_with_price_df = get_stock_with_price_list_df(final_price_list_df, processed_stock_df)
-# mask_df = get_mask_df()
+mask_df = get_mask_df()
 # generating JSON for stock with price list
 
 saveAsJSON(processed_stock_df, processed_stock_json)
 saveAsJSON(final_price_list_df, final_price_list_json)
 saveAsJSON(stock_with_price_df, stock_with_price_list_json)
-# saveAsJSON(mask_df, mask_json)
+saveAsJSON(mask_df, mask_json)
