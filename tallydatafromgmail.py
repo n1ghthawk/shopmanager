@@ -411,7 +411,7 @@ with GmailConnection(username, password) as gmail:
     subject = email_object.info['Subject'].split(" ")
     dateLastUpdate = subject[3] + " " +subject[4]
     datePublish = datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime('%d-%b-%Y %H:%M')
-    fp = open("storage/Processed Stock Summary.csv", 'wb')
+    fp = open("storage_processed_stock_summary.csv", 'wb')
     fp.write(email_object.attachment_data)
     fp.close()
     
@@ -421,7 +421,7 @@ with GmailConnection(username, password) as gmail:
         From="saabtyresdata@gmail.com",
         unseen=None,
     )
-    fp = open("storage/Mask Data.csv", 'wb')
+    fp = open("storage_mask_data.csv", 'wb')
     fp.write(email_object_mask.attachment_data)
     fp.close()
 
