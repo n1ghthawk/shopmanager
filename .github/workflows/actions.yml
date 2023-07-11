@@ -31,8 +31,8 @@ jobs:
           GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
         run: python tallydatafromgmail.py
         
-      - name: execute pricer script # run main.py
-        run: python pricer.py
+#       - name: execute pricer script # run main.py
+#         run: python pricer.py
 
       - name: commit files
         run: |
