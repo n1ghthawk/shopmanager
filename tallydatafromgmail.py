@@ -422,7 +422,7 @@ with GmailConnection(username, password) as gmail:
         unseen=None,
     )
     print(email_object_mask)
-    fp = open("./storage/mask_data.csv", 'wb')
+    fp = open("./storage/Mask Data.csv", 'wb')
     fp.write(email_object_mask.attachment_data)
     fp.close()
 
