@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
 
-processed_stock = "Processed Stock Summary.csv"
-final_price_list = "final_price_list.csv"
+processed_stock = "./storage/Processed Stock Summary.csv"
+final_price_list = "./storage/final_price_list.csv"
 
-processed_stock_json = "Processed Stock Summary.json"
-final_price_list_json = "final_price_list.json"
-stock_with_price_list_json = "stock_with_price_list.json"
+processed_stock_json = "./public/Processed Stock Summary.json"
+final_price_list_json = "./public/final_price_list.json"
+stock_with_price_list_json = "./public/stock_with_price_list.json"
 
 headers_processed_stock = ['items','code','under','quantity','extra']
 headers_raw_stock = ["items", "code", "under", "quantity",'extra']
