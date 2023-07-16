@@ -81,8 +81,12 @@ stock_with_price_df = get_stock_with_price_list_df(final_price_list_df, processe
 # rename dataframes
 final_price_list_df.rename(columns = {'retail_price':'ret_prc','suggested_price':'sug_prc', 'wholesale_price':'wsale_prc'}, inplace = True)
 stock_with_price_df.rename(columns = {'retail_price':'ret_prc','suggested_price':'sug_prc', 'wholesale_price':'wsale_prc'}, inplace = True)
-# generating JSON for stock with price list
 
+# replace NaN for prices with 0
+final_price_list_df[["wsale_prc","sug_prc","ret_prc"]] = final_price_list_df[["wsale_prc","sug_prc","ret_prc"]].fillna(0)
+stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]] = stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]].fillna(0)
+
+# generating JSON for stock with price list
 saveAsJSON(processed_stock_df, processed_stock_json)
 saveAsJSON(final_price_list_df, final_price_list_json)
 saveAsJSON(stock_with_price_df, stock_with_price_list_json)
