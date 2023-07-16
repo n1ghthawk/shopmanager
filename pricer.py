@@ -72,13 +72,15 @@ def saveAsJSON(df, loc):
 
 
 processed_stock_df = get_processed_df()
-final_price_list_df = get_final_price_list_df()
-stock_with_price_df = get_stock_with_price_list_df(final_price_list_df, processed_stock_df)
-
-# clean dataframes
 processed_stock_df.drop(['extra'], axis=1, inplace=True)
+final_price_list_df = get_final_price_list_df()
 final_price_list_df.drop(['extra'], axis=1, inplace=True)
+stock_with_price_df = get_stock_with_price_list_df(final_price_list_df, processed_stock_df)
 stock_with_price_df.drop(['extra'], axis=1, inplace=True)
+
+# rename dataframes
+final_price_list_df.rename(columns = {'retail_price':'ret_prc','suggested_price':'sug_prc', 'wholesale_price':'wsale_prc'}, inplace = True)
+stock_with_price_df.rename(columns = {'retail_price':'ret_prc','suggested_price':'sug_prc', 'wholesale_price':'wsale_prc'}, inplace = True)
 # generating JSON for stock with price list
 
 saveAsJSON(processed_stock_df, processed_stock_json)
