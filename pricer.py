@@ -67,7 +67,7 @@ def get_stock_with_price_list_df(final_price_list_df, processed_stock_df):
     return merged
 
 def updateStatus():
-    data = [['STATUS_ENTITY_GITHUB_LASTUPDATED', datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime("%Y-%m-%dT%H:%M:%S.%f")]]
+    data = [['github_lastUpdated', datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime("%Y-%m-%dT%H:%M:%S.%f")]]
     status_df = pd.DataFrame(data, columns=['param', 'value'])
     return status_df
 
