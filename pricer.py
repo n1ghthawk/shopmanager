@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from datetime import datetime, timezone, timedelta
 
 processed_stock = "./storage/Processed Stock Summary.csv"
 final_price_list = "./storage/final_price_list.csv"
@@ -7,6 +8,7 @@ final_price_list = "./storage/final_price_list.csv"
 processed_stock_json = "./public/Processed Stock Summary.json"
 final_price_list_json = "./public/final_price_list.json"
 stock_with_price_list_json = "./public/stock_with_price_list.json"
+status_json = "./public/status.json"
 
 headers_processed_stock = ['items','code','under','quantity','extra']
 headers_raw_stock = ["items", "code", "under", "quantity",'extra']
@@ -64,7 +66,10 @@ def get_stock_with_price_list_df(final_price_list_df, processed_stock_df):
     merged.drop(columns=['code_pricelist'], inplace=True)
     return merged
 
-
+def updateStatus():
+    data = [['STATUS_ENTITY_GITHUB_LASTUPDATED', datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime("%Y-%m-%dT%H:%M:%S.%f")]]
+    status_df = pd.DataFrame(data, columns=['param', 'value'])
+    return status_df
 
 def saveAsJSON(df, loc):
     df.to_json(loc, orient='records')
@@ -86,7 +91,11 @@ stock_with_price_df.rename(columns = {'retail_price':'ret_prc','suggested_price'
 final_price_list_df[["wsale_prc","sug_prc","ret_prc"]] = final_price_list_df[["wsale_prc","sug_prc","ret_prc"]].fillna(0)
 stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]] = stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]].fillna(0)
 
+# generating status
+status_df = updateStatus()
+
 # generating JSON for stock with price list
 saveAsJSON(processed_stock_df, processed_stock_json)
 saveAsJSON(final_price_list_df, final_price_list_json)
 saveAsJSON(stock_with_price_df, stock_with_price_list_json)
+saveAsJSON(status_df, status_json)
