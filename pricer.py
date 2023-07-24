@@ -90,6 +90,7 @@ stock_with_price_df.rename(columns = {'quantity':'qty','retail_price':'ret_prc',
 # replace NaN for prices with 0
 final_price_list_df[["wsale_prc","sug_prc","ret_prc"]] = final_price_list_df[["wsale_prc","sug_prc","ret_prc"]].fillna(0)
 stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]] = stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]].fillna(0)
+stock_with_price_df[["priced"]] = stock_with_price_df[["priced"]].fillna("No Match")
 
 # generating status
 status_df = updateStatus()
