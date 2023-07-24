@@ -50,7 +50,7 @@ def clean_df(df, columnname):
 def get_processed_df():
     processed_stock_df = csv2df(processed_stock,headers_processed_stock)
     processed_stock_df = processed_stock_df.iloc[1:]
-    processed_stock_df = processed_stock_df[processed_stock_df.quantity != 0]
+    # processed_stock_df = processed_stock_df[processed_stock_df.quantity != 0]
     clean_df(processed_stock_df, 'items')
     return processed_stock_df
 
