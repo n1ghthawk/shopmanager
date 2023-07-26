@@ -4,10 +4,12 @@ from datetime import datetime, timezone, timedelta
 
 processed_stock = "./storage/Processed Stock Summary.csv"
 final_price_list = "./storage/final_price_list.csv"
+tyre_pricelist = "../storage/MRF PRICE LIST.csv"
 
 processed_stock_json = "./public/Processed Stock Summary.json"
 final_price_list_json = "./public/final_price_list.json"
 stock_with_price_list_json = "./public/stock_with_price_list.json"
+tyre_price_list_json = "./public/tyre_price_list.json"
 status_json = "./public/status.json"
 
 headers_processed_stock = ['items','code','under','quantity','extra']
@@ -81,6 +83,7 @@ processed_stock_df.drop(['extra'], axis=1, inplace=True)
 final_price_list_df = get_final_price_list_df()
 final_price_list_df.drop(['extra'], axis=1, inplace=True)
 stock_with_price_df = get_stock_with_price_list_df(final_price_list_df, processed_stock_df)
+tyre_pricelist_df = csv2df(tyre_pricelist, encoding='utf-8')
 
 
 # rename dataframes
@@ -99,4 +102,5 @@ status_df = updateStatus()
 saveAsJSON(processed_stock_df, processed_stock_json)
 saveAsJSON(final_price_list_df, final_price_list_json)
 saveAsJSON(stock_with_price_df, stock_with_price_list_json)
+saveAsJSON(tyre_pricelist_df, tyre_price_list_json)
 saveAsJSON(status_df, status_json)
