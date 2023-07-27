@@ -5,6 +5,7 @@ from datetime import datetime, timezone, timedelta
 processed_stock = "./storage/Processed Stock Summary.csv"
 final_price_list = "./storage/final_price_list.csv"
 tyre_pricelist = "./storage/MRF PRICE LIST.csv"
+status_csv = "./status.csv"
 
 processed_stock_json = "./public/Processed Stock Summary.json"
 final_price_list_json = "./public/final_price_list.json"
@@ -68,14 +69,20 @@ def get_stock_with_price_list_df(final_price_list_df, processed_stock_df):
     merged.drop(columns=['code_pricelist'], inplace=True)
     return merged
 
-def updateStatus():
-    data = [['github_lastUpdated', datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime("%Y-%m-%dT%H:%M:%S.%f")]]
-    status_df = pd.DataFrame(data, columns=['param', 'value'])
-    return status_df
+# def updateStatus():
+#     data = [['github_lastUpdated', datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime("%Y-%m-%dT%H:%M:%S.%f")]]
+#     status_df = pd.DataFrame(data, columns=['param', 'value'])
+#     return status_df
 
 def saveAsJSON(df, loc):
     df.to_json(loc, orient='records')
 
+def getEmailTime():
+    df = pd.read_csv(status_csv, names=["datetime"])
+    emailTime = df.iloc[0]['datetime']
+    data = [['github_lastUpdated', emailTime]]
+    status_df = pd.DataFrame(data, columns=['param', 'value'])
+    return status_df
 
 
 processed_stock_df = get_processed_df()
@@ -96,7 +103,7 @@ stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]] = stock_with_price_df[["w
 stock_with_price_df[["priced"]] = stock_with_price_df[["priced"]].fillna("No Match")
 
 # generating status
-status_df = updateStatus()
+status_df = getEmailTime()
 
 # generating JSON for stock with price list
 saveAsJSON(processed_stock_df, processed_stock_json)
