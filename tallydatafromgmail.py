@@ -419,7 +419,7 @@ with GmailConnection(username, password) as gmail:
     datetime_object_utc = datetime.strptime(update_date, '%a, %d %b %Y %H:%M:%S %z')
     # Convert to Indian Standard Time (IST)
     india_tz = pytz.timezone('Asia/Kolkata')
-    email_send_datetime = datetime_object_utc.astimezone(india_tz).strftime('%d-%b-%Y %H:%M')
+    email_send_datetime = datetime_object_utc.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
 
     
     fp = open("./storage/Processed Stock Summary.csv", 'wb')
