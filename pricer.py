@@ -4,7 +4,7 @@ from datetime import datetime, timezone, timedelta
 
 processed_stock = "./storage/Processed Stock Summary.csv"
 final_price_list = "./storage/final_price_list.csv"
-tyre_pricelist = "../storage/MRF PRICE LIST.csv"
+tyre_pricelist = "./storage/MRF PRICE LIST.csv"
 
 processed_stock_json = "./public/Processed Stock Summary.json"
 final_price_list_json = "./public/final_price_list.json"
