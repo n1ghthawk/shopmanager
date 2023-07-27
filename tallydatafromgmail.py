@@ -13,6 +13,7 @@ from email.message import EmailMessage
 from typing import Literal  # does not work with Python 3.7
 import os
 from datetime import datetime, timezone, timedelta
+import pytz
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -411,6 +412,16 @@ with GmailConnection(username, password) as gmail:
     subject = email_object.info['Subject'].split(" ")
     dateLastUpdate = subject[3] + " " +subject[4]
     datePublish = datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime('%d-%b-%Y %H:%M')
+
+    # getting email sent date
+    update_date = email_object.info['Date']
+    # Given datetime object (in UTC)
+    datetime_object_utc = datetime.strptime(update_date, '%a, %d %b %Y %H:%M:%S %z')
+    # Convert to Indian Standard Time (IST)
+    india_tz = pytz.timezone('Asia/Kolkata')
+    email_send_datetime = datetime_object_utc.astimezone(india_tz).strftime('%d-%b-%Y %H:%M')
+
+    
     fp = open("./storage/Processed Stock Summary.csv", 'wb')
     fp.write(email_object.attachment_data)
     fp.close()
@@ -427,6 +438,7 @@ with GmailConnection(username, password) as gmail:
     fp.close()
 
     fp = open("status.csv", 'w')
+    fp.write(email_send_datetime + "\n")
     fp.write(dateLastUpdate + "\n")
     fp.write(datePublish)
     fp.close()
