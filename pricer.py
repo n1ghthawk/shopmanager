@@ -18,7 +18,7 @@ status_json = "./public/status.json"
 headers_processed_stock = ['items','code','under','quantity','extra']
 headers_raw_stock = ["items", "code", "under", "quantity",'extra']
 headers_mask_stock = ["items", "code", "under", "quantity",'extra']
-headers_reorder_stock = ["items", "code", "reorderlevel", "quantity",'netquantity',"purchaseprice", "gstprice", "gstrate", "lastpurchaserate",'reorderquantity','extra']
+headers_reorder_stock = ["items", "code", "reorderlevel", "quantity",'netquantity',"purchaseprice", "gstprice", "gstrate", "lastpurchasedate",'reorderquantity','extra']
 
 # def csv2df(loc, headers=None):
 #     if headers:
