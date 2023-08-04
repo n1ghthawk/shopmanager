@@ -437,6 +437,23 @@ with GmailConnection(username, password) as gmail:
     fp.write(email_object_mask.attachment_data)
     fp.close()
 
+
+
+    email_object_mask = GmailEmail.from_search_result(
+        gmail_connection=connection,
+        subject="Reorder and Purchase",
+        From="saabtyresdata@gmail.com",
+        unseen=None,
+    )
+    print(email_object_mask)
+    fp = open("./storage/ReorderPurc.csv", 'wb')
+    fp.write(email_object_mask.attachment_data)
+    fp.close()
+
+
+
+
+
     fp = open("status.csv", 'w')
     fp.write(email_send_datetime + "\n")
     fp.write(dateLastUpdate + "\n")
