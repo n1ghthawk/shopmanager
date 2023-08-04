@@ -5,17 +5,20 @@ from datetime import datetime, timezone, timedelta
 processed_stock = "./storage/Processed Stock Summary.csv"
 final_price_list = "./storage/final_price_list.csv"
 tyre_pricelist = "./storage/MRF PRICE LIST.csv"
+reorder_csv = "./storage/ReorderPurc.csv"
 status_csv = "./status.csv"
 
 processed_stock_json = "./public/Processed Stock Summary.json"
 final_price_list_json = "./public/final_price_list.json"
 stock_with_price_list_json = "./public/stock_with_price_list.json"
 tyre_price_list_json = "./public/tyre_price_list.json"
+reorder_json = "./public/ReorderPurc.json"
 status_json = "./public/status.json"
 
 headers_processed_stock = ['items','code','under','quantity','extra']
 headers_raw_stock = ["items", "code", "under", "quantity",'extra']
 headers_mask_stock = ["items", "code", "under", "quantity",'extra']
+headers_reorder_stock = ["items", "code", "reorderlevel", "quantity",'netquantity',"purchaseprice", "gstprice", "gstrate", "lastpurchaserate",'reorderquantity']
 
 # def csv2df(loc, headers=None):
 #     if headers:
