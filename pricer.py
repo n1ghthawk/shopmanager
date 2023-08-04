@@ -12,7 +12,7 @@ processed_stock_json = "./public/Processed Stock Summary.json"
 final_price_list_json = "./public/final_price_list.json"
 stock_with_price_list_json = "./public/stock_with_price_list.json"
 tyre_price_list_json = "./public/tyre_price_list.json"
-reorder_json = "./public/ReorderPurc.json"
+reorder_json = "./public/reorderpurc.json"
 status_json = "./public/status.json"
 
 headers_processed_stock = ['items','code','under','quantity','extra']
