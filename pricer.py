@@ -105,6 +105,10 @@ final_price_list_df[["wsale_prc","sug_prc","ret_prc"]] = final_price_list_df[["w
 stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]] = stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]].fillna(0)
 stock_with_price_df[["priced"]] = stock_with_price_df[["priced"]].fillna("No Match")
 
+# Reorder and Purchase Data
+reorder_df = csv2df(reorder_csv, headers=headers_reorder_stock)
+reorder_df.drop(['extra'], axis=1, inplace=True)
+
 # generating status
 status_df = getEmailTime()
 
@@ -113,4 +117,5 @@ saveAsJSON(processed_stock_df, processed_stock_json)
 saveAsJSON(final_price_list_df, final_price_list_json)
 saveAsJSON(stock_with_price_df, stock_with_price_list_json)
 saveAsJSON(tyre_pricelist_df, tyre_price_list_json)
+saveAsJSON(reorder_df, reorder_json)
 saveAsJSON(status_df, status_json)
