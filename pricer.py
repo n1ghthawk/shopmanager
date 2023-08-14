@@ -106,7 +106,7 @@ stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]] = stock_with_price_df[["w
 stock_with_price_df[["priced"]] = stock_with_price_df[["priced"]].fillna("No Match")
 
 # Reorder and Purchase Data
-reorder_df = csv2df(reorder_csv, headers=headers_reorder_stock, {'code': str})
+reorder_df = csv2df(reorder_csv, headers=headers_reorder_stock, dtype={'code': str})
 reorder_df.drop(['extra'], axis=1, inplace=True)
 
 # generating status
