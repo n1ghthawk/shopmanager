@@ -26,7 +26,7 @@ headers_reorder_stock = ["code", "items", "reorderlevel", "quantity",'netquantit
 #     else:
 #         return pd.read_csv(loc,encoding="utf-16le")
 
-def csv2df(loc, headers=None, encoding='utf-16le'):
+def csv2df(loc, headers=None, encoding='utf-16le', dtype = None):
     # Read in the file
     # with open(loc, 'r') as file :
     #     filedata = file.read()
@@ -37,9 +37,9 @@ def csv2df(loc, headers=None, encoding='utf-16le'):
     # with open(loc, 'w', encoding='utf-16le') as file:
     #     file.write(filedata)
     if headers:
-        return pd.read_csv(loc, encoding=encoding, names=headers)
+        return pd.read_csv(loc, encoding=encoding, names=headers, dtype=dtype)
     else:
-        return pd.read_csv(loc, encoding=encoding)
+        return pd.read_csv(loc, encoding=encoding,dtype=dtype)
 
 def assignPrice(pricelist_df, processed_stock_df):
     priced_tally_df = pd.merge(processed_stock_df, pricelist_df, on='items', how='left')
@@ -106,7 +106,7 @@ stock_with_price_df[["wsale_prc","sug_prc","ret_prc"]] = stock_with_price_df[["w
 stock_with_price_df[["priced"]] = stock_with_price_df[["priced"]].fillna("No Match")
 
 # Reorder and Purchase Data
-reorder_df = csv2df(reorder_csv, headers=headers_reorder_stock)
+reorder_df = csv2df(reorder_csv, headers=headers_reorder_stock, {'code': str})
 reorder_df.drop(['extra'], axis=1, inplace=True)
 
 # generating status
