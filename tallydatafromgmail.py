@@ -413,16 +413,20 @@ with GmailConnection(username, password) as gmail:
     )
     print(email_object)
     subject = email_object.info['Subject'].split(" ")
-    dateLastUpdate = subject[-1] + " " +subject[-2]
-    datePublish = datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime('%d-%b-%Y %H:%M')
-
-    # getting email sent date
-    update_date = email_object.info['Date']
-    # Given datetime object (in UTC)
-    datetime_object_utc = datetime.strptime(update_date, '%a, %d %b %Y %H:%M:%S %z')
+    dataLastUpdate = subject[-2] + " " +subject[-1]
+    dataLastUpdate_toDatetime = datetime.strptime(dataLastUpdate, '%d-%b-%Y %H:%M')
     # Convert to Indian Standard Time (IST)
     india_tz = pytz.timezone('Asia/Kolkata')
-    email_send_datetime = datetime_object_utc.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
+    dataLastUpdate_as_str = dataLastUpdate_toDatetime.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
+    # datePublish = datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime('%d-%b-%Y %H:%M')
+
+    # getting email sent date
+    # update_date = email_object.info['Date']
+    # Given datetime object (in UTC)
+    # datetime_object_utc = datetime.strptime(update_date, '%a, %d %b %Y %H:%M:%S %z')
+    # Convert to Indian Standard Time (IST)
+    # india_tz = pytz.timezone('Asia/Kolkata')
+    # email_send_datetime = datetime_object_utc.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
 
     fp = open("./storage/Processed Stock Summary.csv", 'wb')
     fp.write(email_object.attachment_data)
@@ -462,9 +466,9 @@ with GmailConnection(username, password) as gmail:
 
 
     fp = open("status.csv", 'w')
-    fp.write(email_send_datetime + "\n")
-    fp.write(dateLastUpdate + "\n")
-    fp.write(datePublish)
+    # fp.write(email_send_datetime + "\n")
+    fp.write(dataLastUpdate_as_str + "\n")
+    # fp.write(datePublish)
     fp.close()
 
         
