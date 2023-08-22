@@ -380,7 +380,11 @@ logger.addHandler(logger_stream_handler)
 
 ######################## USER GENERATED FROM HERE#####################
 
-
+def extractUpdateTime(dataLastUpdate):
+    dataLastUpdate_toDatetime = datetime.strptime(dataLastUpdate, '%d-%b-%Y %H:%M')
+    # Convert to Indian Standard Time (IST)
+    india_tz = pytz.timezone('Asia/Kolkata')
+    return dataLastUpdate_toDatetime.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
 
 
 
@@ -394,6 +398,7 @@ try:
 except KeyError:
     print("SECRETS NOT FOUND!")
 
+status_fp = open("status.csv", 'w')
 
 # test program
 # IMPORTANT: NOT ALL USE CASES ARE TESTED. ONLY THE SIMPLEST USE CASE IS TESTED HERE.
@@ -412,12 +417,14 @@ with GmailConnection(username, password) as gmail:
         unseen=None,
     )
     print(email_object)
+
     subject = email_object.info['Subject'].split(" ")
     dataLastUpdate = subject[-2] + " " +subject[-1]
-    dataLastUpdate_toDatetime = datetime.strptime(dataLastUpdate, '%d-%b-%Y %H:%M')
-    # Convert to Indian Standard Time (IST)
-    india_tz = pytz.timezone('Asia/Kolkata')
-    dataLastUpdate_as_str = dataLastUpdate_toDatetime.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
+    dataLastUpdate_as_str = extractUpdateTime(dataLastUpdate)
+    # dataLastUpdate_toDatetime = datetime.strptime(dataLastUpdate, '%d-%b-%Y %H:%M')
+    # # Convert to Indian Standard Time (IST)
+    # india_tz = pytz.timezone('Asia/Kolkata')
+    # dataLastUpdate_as_str = dataLastUpdate_toDatetime.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
     # datePublish = datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime('%d-%b-%Y %H:%M')
 
     # getting email sent date
@@ -427,10 +434,11 @@ with GmailConnection(username, password) as gmail:
     # Convert to Indian Standard Time (IST)
     # india_tz = pytz.timezone('Asia/Kolkata')
     # email_send_datetime = datetime_object_utc.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
-
+    
     fp = open("./storage/Processed Stock Summary.csv", 'wb')
     fp.write(email_object.attachment_data)
     fp.close()
+    status_fp.write(dataLastUpdate_as_str + "\n")
     
 
 
@@ -442,10 +450,15 @@ with GmailConnection(username, password) as gmail:
         unseen=None,
     )
     print(email_object_mask)
+
+    subject = email_object.info['Subject'].split(" ")
+    dataLastUpdate = subject[-2] + " " +subject[-1]
+    dataLastUpdate_as_str = extractUpdateTime(dataLastUpdate)
+
     fp = open("./storage/Mask Data.csv", 'wb')
     fp.write(email_object_mask.attachment_data)
     fp.close()
-
+    status_fp.write(dataLastUpdate_as_str + "\n")
 
 
 
@@ -457,18 +470,21 @@ with GmailConnection(username, password) as gmail:
         unseen=None,
     )
     print(email_object_mask)
+
+    subject = email_object.info['Subject'].split(" ")
+    dataLastUpdate = subject[-2][7:] + " " +subject[-1]
+    dataLastUpdate_as_str = extractUpdateTime(dataLastUpdate)
+
     fp = open("./storage/ReorderPurc.csv", 'wb')
     fp.write(email_object_mask.attachment_data)
     fp.close()
+    status_fp.write(dataLastUpdate_as_str + "\n")
 
 
-
-
-
-    fp = open("status.csv", 'w')
+    
     # fp.write(email_send_datetime + "\n")
-    fp.write(dataLastUpdate_as_str + "\n")
+    
     # fp.write(datePublish)
-    fp.close()
+    status_fp.close()
 
         
