@@ -451,7 +451,7 @@ with GmailConnection(username, password) as gmail:
     )
     print(email_object_mask)
 
-    subject = email_object.info['Subject'].split(" ")
+    subject = email_object_mask.info['Subject'].split(" ")
     dataLastUpdate = subject[-2] + " " +subject[-1]
     dataLastUpdate_as_str = extractUpdateTime(dataLastUpdate)
 
@@ -463,20 +463,20 @@ with GmailConnection(username, password) as gmail:
 
 
 
-    email_object_mask = GmailEmail.from_search_result(
+    email_object_reorder = GmailEmail.from_search_result(
         gmail_connection=connection,
         subject="Reorder and Purchase",
         From="saabtyresdata@gmail.com",
         unseen=None,
     )
-    print(email_object_mask)
+    print(email_object_reorder)
 
-    subject = email_object.info['Subject'].split(" ")
+    subject = email_object_reorder.info['Subject'].split(" ")
     dataLastUpdate = subject[-2][7:] + " " +subject[-1]
     dataLastUpdate_as_str = extractUpdateTime(dataLastUpdate)
 
     fp = open("./storage/ReorderPurc.csv", 'wb')
-    fp.write(email_object_mask.attachment_data)
+    fp.write(email_object_reorder.attachment_data)
     fp.close()
     status_fp.write(dataLastUpdate_as_str + "\n")
 
