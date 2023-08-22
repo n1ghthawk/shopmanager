@@ -383,8 +383,9 @@ logger.addHandler(logger_stream_handler)
 def extractUpdateTime(dataLastUpdate):
     dataLastUpdate_toDatetime = datetime.strptime(dataLastUpdate, '%d-%b-%Y %H:%M')
     # Convert to Indian Standard Time (IST)
-    india_tz = pytz.timezone('Asia/Kolkata')
-    return dataLastUpdate_toDatetime.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
+    # india_tz = pytz.timezone('Asia/Kolkata')
+    # return dataLastUpdate_toDatetime.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
+    return dataLastUpdate_toDatetime.strftime("%Y-%m-%dT%H:%M:%S.%f")
 
 
 
