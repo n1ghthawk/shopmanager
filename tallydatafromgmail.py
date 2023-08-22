@@ -401,6 +401,9 @@ with GmailConnection(username, password) as gmail:
     # get the IMAP4_SSL connection
     connection = gmail.get_connection()
     print("got connection")
+
+
+
     # get email through search criterias
     email_object = GmailEmail.from_search_result(
         gmail_connection=connection,
@@ -410,7 +413,7 @@ with GmailConnection(username, password) as gmail:
     )
     print(email_object)
     subject = email_object.info['Subject'].split(" ")
-    dateLastUpdate = subject[3] + " " +subject[4]
+    dateLastUpdate = subject[-1] + " " +subject[-2]
     datePublish = datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime('%d-%b-%Y %H:%M')
 
     # getting email sent date
@@ -421,11 +424,13 @@ with GmailConnection(username, password) as gmail:
     india_tz = pytz.timezone('Asia/Kolkata')
     email_send_datetime = datetime_object_utc.astimezone(india_tz).strftime("%Y-%m-%dT%H:%M:%S.%f")
 
-    
     fp = open("./storage/Processed Stock Summary.csv", 'wb')
     fp.write(email_object.attachment_data)
     fp.close()
     
+
+
+
     email_object_mask = GmailEmail.from_search_result(
         gmail_connection=connection,
         subject="Mask Data",
@@ -436,6 +441,8 @@ with GmailConnection(username, password) as gmail:
     fp = open("./storage/Mask Data.csv", 'wb')
     fp.write(email_object_mask.attachment_data)
     fp.close()
+
+
 
 
 
