@@ -439,7 +439,7 @@ with GmailConnection(username, password) as gmail:
     fp = open("./storage/Processed Stock Summary.csv", 'wb')
     fp.write(email_object.attachment_data)
     fp.close()
-    status_fp.write("processed_data",dataLastUpdate_as_str + "\n")
+    status_fp.write("processed_data,"+dataLastUpdate_as_str + "\n")
     
 
 
@@ -459,7 +459,7 @@ with GmailConnection(username, password) as gmail:
     fp = open("./storage/Mask Data.csv", 'wb')
     fp.write(email_object_mask.attachment_data)
     fp.close()
-    status_fp.write("mask_data",dataLastUpdate_as_str + "\n")
+    status_fp.write("mask_data,"+dataLastUpdate_as_str + "\n")
 
 
 
@@ -479,7 +479,7 @@ with GmailConnection(username, password) as gmail:
     fp = open("./storage/ReorderPurc.csv", 'wb')
     fp.write(email_object_reorder.attachment_data)
     fp.close()
-    status_fp.write("reorder_data",dataLastUpdate_as_str + "\n")
+    status_fp.write("reorder_data,"+dataLastUpdate_as_str + "\n")
 
 
     
