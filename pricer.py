@@ -7,6 +7,7 @@ final_price_list = "./storage/final_price_list.csv"
 tyre_pricelist = "./storage/MRF PRICE LIST.csv"
 reorder_csv = "./storage/ReorderPurc.csv"
 status_csv = "./status.csv"
+statusmrf_csv = "./status_mrf.csv"
 
 processed_stock_json = "./public/Processed Stock Summary.json"
 final_price_list_json = "./public/final_price_list.json"
@@ -43,6 +44,15 @@ current_status_df = pd.DataFrame(columns=headers_current_status)
 try:
     current_status_df = pd.read_csv(current_status_file, names=headers_current_status)
     print(current_status_df)
+except:
+    pass
+
+mrf_status_file = statusmrf_csv
+headers_current_status = ["param","value"]
+current_status_df = pd.DataFrame(columns=headers_current_status)
+try:
+    mrf_status_df = pd.read_csv(mrf_status_file, names=headers_current_status)
+    print(mrf_status_df)
 except:
     pass
 
@@ -165,11 +175,11 @@ try:
     tyre_pricelist_df = csv2df(tyre_pricelist, encoding='utf-8')
     if(len(tyre_pricelist_df.index)>0):
         saveAsJSON(tyre_pricelist_df, tyre_price_list_json)
-        status_data.append({'param':'pricelist_mrf', 'value':get_value(current_status_df,'param','pricelist_mrf')})
+        status_data.append({'param':'pricelist_mrf', 'value':get_value(mrf_status_df,'param','pricelist_mrf')})
     else:
-        status_data.append({'param':'pricelist_mrf', 'value':get_value(old_status_df,'param','pricelist_mrf')})
+        status_data.append({'param':'pricelist_mrf', 'value':get_value(mrf_status_df,'param','pricelist_mrf')})
 except:
-    status_data.append({'param':'pricelist_mrf', 'value':get_value(old_status_df,'param','pricelist_mrf')})
+    status_data.append({'param':'pricelist_mrf', 'value':get_value(mrf_status_df,'param','pricelist_mrf')})
 
 
 # Processing Reorder and Purchase Data
