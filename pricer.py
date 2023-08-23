@@ -198,6 +198,7 @@ except:
 
 # generating status
 # status_df = getEmailTime()
+status_data.append({'param':'generated', 'value':datetime.now(timezone(timedelta(hours=5, minutes=30))).strftime("%Y-%m-%dT%H:%M:%S.%f")})
 status_df = pd.DataFrame.from_records(status_data)
 saveAsJSON(status_df, status_json)
 
