@@ -155,7 +155,8 @@ try:
         status_data.append({'param':'processed_data', 'value':get_value(current_status_df,'param','processed_data')})
     else:
         status_data.append({'param':'processed_data', 'value':get_value(old_status_df,'param','processed_data')})
-except:
+except Exception as error:
+    print("An error occurred:", error)
     status_data.append({'param':'processed_data', 'value':get_value(old_status_df,'param','processed_data')})
 
 
