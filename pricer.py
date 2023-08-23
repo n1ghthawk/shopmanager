@@ -138,7 +138,7 @@ status_data=[]
 try:    
     processed_stock_df = get_processed_df()
     final_price_list_df = get_final_price_list_df()
-    if(len(processed_stock_df.index)>0 and len(get_final_price_list_df.index)>0):
+    if(len(processed_stock_df.index)>0 and len(final_price_list_df.index)>0):
         processed_stock_df.drop(['extra'], axis=1, inplace=True)    
         final_price_list_df.drop(['extra'], axis=1, inplace=True)
         stock_with_price_df = get_stock_with_price_list_df(final_price_list_df, processed_stock_df)
