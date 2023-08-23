@@ -175,11 +175,11 @@ try:
     tyre_pricelist_df = csv2df(tyre_pricelist, encoding='utf-8')
     if(len(tyre_pricelist_df.index)>0):
         saveAsJSON(tyre_pricelist_df, tyre_price_list_json)
-        status_data.append({'param':'pricelist_mrf', 'value':get_value(mrf_status_df,'param','pricelist_mrf')})
+        status_data.append({'param':'mrf_pricelist', 'value':get_value(mrf_status_df,'param','mrf_pricelist')})
     else:
-        status_data.append({'param':'pricelist_mrf', 'value':get_value(mrf_status_df,'param','pricelist_mrf')})
+        status_data.append({'param':'mrf_pricelist', 'value':get_value(mrf_status_df,'param','mrf_pricelist')})
 except:
-    status_data.append({'param':'pricelist_mrf', 'value':get_value(mrf_status_df,'param','pricelist_mrf')})
+    status_data.append({'param':'mrf_pricelist', 'value':get_value(mrf_status_df,'param','mrf_pricelist')})
 
 
 # Processing Reorder and Purchase Data
