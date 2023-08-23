@@ -50,7 +50,7 @@ except:
 def get_value(df,colname,itemname):
     time = df.loc[df[colname] == itemname]
     if(not time.empty):
-        return time['value'][0]
+        return time['value'].values[0]
     else:
         return ""
 
