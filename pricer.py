@@ -48,10 +48,10 @@ except:
     pass
 
 mrf_status_file = statusmrf_csv
-headers_current_status = ["param","value"]
-current_status_df = pd.DataFrame(columns=headers_current_status)
+headers_mrf_status = ["param","value"]
+mrf_status_df = pd.DataFrame(columns=headers_mrf_status)
 try:
-    mrf_status_df = pd.read_csv(mrf_status_file, names=headers_current_status)
+    mrf_status_df = pd.read_csv(mrf_status_file, names=headers_mrf_status)
     print(mrf_status_df)
 except:
     pass
